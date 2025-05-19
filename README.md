@@ -1,3 +1,11 @@
+# W Swap Smart Contracts
+
+A set of smart contracts for [W Swap](https://w-swap.com).
+Including LP Incentives and other incentives mechanisms in the future.
+Test suites provided.
+
+Developed using Foundry.
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
