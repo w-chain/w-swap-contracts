@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import { IACM } from "./interfaces/IACM.sol";
 import { IWAVE } from "./interfaces/IWAVE.sol";
-import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { IERC20 } from "./interfaces/IERC20.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { WadRayMath } from "./lib/WadRayMath.sol";
 
@@ -88,7 +88,7 @@ contract WaveMaker is ReentrancyGuard {
         wavePerBlock = _wavePerBlock;
 
         pools.push(Pool({
-            token: WAVE,
+            token: IERC20(wave),
             accWavePerShare: 0,
             lastRewardBlock: uint32(startBlock),
             allocation: 1000,

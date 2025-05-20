@@ -5,7 +5,7 @@ import { Test } from "forge-std/Test.sol";
 import { WaveMaker } from "../src/WaveMaker.sol";
 import { WAVE } from "../src/Wave.sol";
 import { ACM } from "../src/ACM.sol";
-import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { IERC20 } from "../src/interfaces/IERC20.sol";
 import { MockERC20 } from "../src/lib/MockERC20.sol";
 
 contract WaveMakerTest is Test {
