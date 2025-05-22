@@ -1,12 +1,12 @@
 pragma solidity =0.5.16;
 
-import './interfaces/IWSwapV2ERC20.sol';
-import './lib/SafeMath.sol';
+import './interfaces/IUniswapV2ERC20.sol';
+import './libraries/SafeMath.sol';
 
-contract WSwapV2ERC20 is IWSwapV2ERC20 {
+contract WSwapV2ERC20 is IUniswapV2ERC20 {
     using SafeMath for uint;
 
-    string public constant name = 'W Swap LP V2';
+    string public constant name = 'WLP V2';
     string public constant symbol = 'WLP-V2';
     uint8 public constant decimals = 18;
     uint  public totalSupply;

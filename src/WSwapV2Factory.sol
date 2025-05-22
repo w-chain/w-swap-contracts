@@ -1,9 +1,9 @@
 pragma solidity =0.5.16;
 
-import './interfaces/IWSwapV2Factory.sol';
+import './interfaces/IUniswapV2Factory.sol';
 import './WSwapV2Pair.sol';
 
-contract WSwapV2Factory is IWSwapV2Factory {
+contract WSwapV2Factory is IUniswapV2Factory {
     address public feeTo;
     address public feeToSetter;
 
@@ -11,6 +11,8 @@ contract WSwapV2Factory is IWSwapV2Factory {
     address[] public allPairs;
 
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+
+    bytes32 public constant INIT_CODE_HASH = keccak256(abi.encodePacked(type(WSwapV2Pair).creationCode));
 
     constructor(address _feeToSetter) public {
         feeToSetter = _feeToSetter;
@@ -21,16 +23,16 @@ contract WSwapV2Factory is IWSwapV2Factory {
     }
 
     function createPair(address tokenA, address tokenB) external returns (address pair) {
-        require(tokenA != tokenB, 'WSwapV2: IDENTICAL_ADDRESSES');
+        require(tokenA != tokenB, 'IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'WSwapV2: ZERO_ADDRESS');
-        require(getPair[token0][token1] == address(0), 'WSwapV2: PAIR_EXISTS'); // single check is sufficient
+        require(token0 != address(0), 'ZERO_ADDRESS');
+        require(getPair[token0][token1] == address(0), 'PAIR_EXISTS'); // single check is sufficient
         bytes memory bytecode = type(WSwapV2Pair).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
         assembly {
             pair := create2(0, add(bytecode, 32), mload(bytecode), salt)
         }
-        IWSwapV2Pair(pair).initialize(token0, token1);
+        IUniswapV2Pair(pair).initialize(token0, token1);
         getPair[token0][token1] = pair;
         getPair[token1][token0] = pair; // populate mapping in the reverse direction
         allPairs.push(pair);
@@ -38,12 +40,12 @@ contract WSwapV2Factory is IWSwapV2Factory {
     }
 
     function setFeeTo(address _feeTo) external {
-        require(msg.sender == feeToSetter, 'WSwapV2: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'FORBIDDEN');
         feeTo = _feeTo;
     }
 
     function setFeeToSetter(address _feeToSetter) external {
-        require(msg.sender == feeToSetter, 'WSwapV2: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'FORBIDDEN');
         feeToSetter = _feeToSetter;
     }
 }
