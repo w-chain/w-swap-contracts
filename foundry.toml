@@ -12,9 +12,17 @@ optimizer_runs = 200
 [etherscan]
 wchain = { key = "verifyContract", chain = 171717, url = 'https://scan.w-chain.com/api' }
 wchain-test = { key = "verifyContract", chain = 71117, url = 'https://scan-testnet.w-chain.com/api' }
+mainnet = { key = "${ETHERSCAN_API_KEY}" }
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
+bsc-testnet = { key = "${ETHERSCAN_API_KEY}", chain = 97, url = "https://api.etherscan.io/v2/api?chainid=97" }
+bsc = { key = "${ETHERSCAN_API_KEY}", chain = 56, url = "https://api.etherscan.io/v2/api?chainid=56" }
 
 [rpc_endpoints]
 wchain = "https://rpc.w-chain.com"
 wchain-test = "https://rpc-testnet.w-chain.com"
+mainnet = "https://eth.drpc.org"
+sepolia = "https://ethereum-sepolia-rpc.publicnode.com"
+bsc = "https://bsc-dataseed.bnbchain.org/"
+bsc-testnet = "https://bsc-testnet-dataseed.bnbchain.org/"
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
